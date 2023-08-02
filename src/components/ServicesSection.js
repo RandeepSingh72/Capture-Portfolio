@@ -9,9 +9,13 @@ import home2 from "../img/home2.png";
 import styled from "styled-components";
 import { About, Description, Image } from "../styles";
 
+import { fade } from "../animation";
+import { useScroll } from "./useScroll";
+
 const ServicesSection = () => {
+    const [element, controls] = useScroll();
     return(
-        <Services>
+        <Services variants={fade} animate={controls} ref={element}>
             <Description>
                 <h2>High <span>quality</span> service.</h2>
                 <Cards>
@@ -62,11 +66,21 @@ const Services = styled(About)`
     }
 `;
 const Cards = styled.div`
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+    margin-left: 1rem;
+    margin-right: 0rem;
+    @media screen and (max-width: 780px) {
+    justify-content: center;
+    }
 `;
 const Card = styled.div`
-    flex-basis: 20rem;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 10px;
     .icon{
         display: flex;
         align-items: center;
